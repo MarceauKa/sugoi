@@ -1,0 +1,33 @@
+@include('partials.header')
+
+@if(isset($name))
+<h1>Hello {{ ucfirst($name) }} !</h1>
+@else
+<h1>Hello world !</h1>
+<p>Essayez <code>/{name}</code> ou cliquez <a href="{{ url()->route('show', ['marceau']) }}">ici</a> !</p>
+@endif
+
+@if(isset($persons))
+<h2>Exemple de tableau</h2>
+
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Admin ?</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($persons as $person)
+    <tr>
+        <td>{{ $person['id'] }}</td>
+        <td>{{ $person['name'] }}</td>
+        <td>{{ $person['admin'] ? 'Oui' : 'Non' }}</td>
+    </tr>
+    @endforeach
+    </tbody>
+</table>
+@endif
+
+@include('partials.footer')
