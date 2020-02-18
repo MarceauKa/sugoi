@@ -2,6 +2,13 @@
 
 namespace Core\Foundation;
 
+use Core\Db\DB;
+use Core\Error\Oops;
+use Core\Http\Request;
+use Core\Http\Response;
+use Core\Http\Url;
+use Core\Router\Router;
+
 class App
 {
     const VERSION = '0.0.1';
