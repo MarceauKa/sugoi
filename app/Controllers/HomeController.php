@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Post;
-use App\Models\User;
-
 class HomeController
 {
     public function index()
