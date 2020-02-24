@@ -14,7 +14,7 @@ de n'avoir **aucune dépendance**.
 * Lancez `composer dumpautoload`,
 * Copiez le fichier `.env.example` en `.env`,
 * Paramétrez l'application dans ce fichier, 
-* Configurez votre serveur ou lancez la commande `php -S 127.0.0.1:8080 -t public/`
+* Configurez votre serveur ou lancez la commande `php sugoi serve`
 
 # Documentation
 
