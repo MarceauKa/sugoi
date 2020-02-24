@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\View\Exceptions;
+namespace Core\View;
 
 class View
 {

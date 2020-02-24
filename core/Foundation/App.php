@@ -2,6 +2,8 @@
 
 namespace Core\Foundation;
 
+use Core\Cli\Cli;
+use Core\Cli\Console;
 use Core\Db\DB;
 use Core\Error\Oops;
 use Core\Http\Request;
@@ -9,7 +11,7 @@ use Core\Http\Response;
 use Core\Http\Url;
 use Core\Router\Router;
 
-class App
+abstract class App
 {
     const VERSION = '0.0.1';
 
@@ -19,12 +21,15 @@ class App
     protected $container;
     /** @var string $root */
     protected $root;
+    /** @var bool $runningInConsole */
+    protected $runningInConsole = false;
 
     private function __construct()
     {
         $this->container = new Container($this);
 
         $this->boot();
+        $this->register();
     }
 
     /**
@@ -74,6 +79,12 @@ class App
     protected function boot(): self
     {
         $this->container
+            ->singleton(Cli::class, function ($app) {
+                return new Cli($app);
+            })
+            ->singleton(Console::class, function ($app) {
+                return new Console($app);
+            })
             ->singleton(Env::class, function ($app) {
                 return new Env($app);
             })
@@ -98,6 +109,8 @@ class App
             ->bind(Oops::class, function (App $app) {
                 return new Oops($app->instance(Response::class));
             })
+            ->alias('cli', Cli::class)
+            ->alias('console', Console::class)
             ->alias('env', Env::class)
             ->alias('config', Config::class)
             ->alias('db', DB::class)
@@ -107,5 +120,58 @@ class App
             ->alias('url', Url::class);
 
         return $this;
+    }
+
+    /**
+     * Register all app component (commands, ...)
+     *
+     * @return self
+     */
+    protected function register(): self
+    {
+        $this->registerSingletons($this->container)
+             ->registerInstances($this->container)
+             ->registerCommands($this->instance('console'));
+
+        return $this;
+    }
+
+    /**
+     * Enregistre des commandes pour la console
+     *
+     * @return self
+     */
+    abstract public function registerCommands(Console $console): self;
+
+    /**
+     * Enregistre les instances pour le container
+     *
+     * @return self
+     */
+    abstract public function registerInstances(Container $container): self;
+
+    /**
+     * Enregistre les instances pour le container
+     *
+     * @return self
+     */
+    abstract public function registerSingletons(Container $container): self;
+
+    /**
+     * Retourne si l'application tourne en CLI
+     * et permet de définir ce statut si un paramètre booléen est fourni
+     *
+     * @param bool|null $status
+     * @return bool
+     */
+    public function runningInConsole(?bool $status = null): bool
+    {
+        if (is_null($status)) {
+            return $this->runningInConsole;
+        }
+
+        $this->runningInConsole = $status;
+
+        return $status;
     }
 }

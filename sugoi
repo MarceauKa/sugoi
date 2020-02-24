@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+
+require 'vendor/autoload.php';
+
+$app = \App\Application::run();
+$app->instance(\Core\Cli\Console::class)->listen();

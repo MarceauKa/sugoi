@@ -2,7 +2,9 @@
 
 namespace Core\Http;
 
-use App\Core\Exceptions\RouteNotFoundException;
+use Core\Router\Exceptions\RouteNotFoundException;
+use Core\Router\Route;
+use Core\Router\Router;
 
 class Url
 {

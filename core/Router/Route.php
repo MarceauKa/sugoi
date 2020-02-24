@@ -2,6 +2,8 @@
 
 namespace Core\Router;
 
+use Core\Http\Response;
+
 class Route
 {
     /** @var string $method */

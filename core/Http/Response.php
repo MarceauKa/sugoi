@@ -3,6 +3,7 @@
 namespace Core\Http;
 
 use Core\Foundation\App;
+use Core\View\View;
 
 class Response
 {
@@ -17,7 +18,7 @@ class Response
     {
         $this->request = $request;
 
-        $this->withHeader('Version', sprintf('Sugoi %s', App::VERSION));
+        $this->withHeader('X-Framework', sprintf('Sugoi/%s', App::VERSION));
     }
 
     /**

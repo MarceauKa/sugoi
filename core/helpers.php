@@ -16,18 +16,18 @@ if (false === function_exists('dd')) {
 
 if (false === function_exists('app')) {
     /**
-     * Retourne une instance de la classe \Core\Foundation\App
+     * Retourne une instance de la classe App\Application
      *
      * @param string|null $key
-     * @return \Core\Foundation\App|mixed
+     * @return App\Application|mixed
      */
     function app(?string $key = null)
     {
         if (false === is_null($key)) {
-            return \Core\Foundation\App::run()->instance($key);
+            return App\Application::run()->instance($key);
         }
 
-        return \Core\Foundation\App::run();
+        return App\Application::run();
     }
 }
 
