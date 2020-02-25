@@ -16,6 +16,22 @@ de n'avoir **aucune dépendance**.
 * Paramétrez l'application dans ce fichier, 
 * Configurez votre serveur ou lancez la commande `php sugoi serve`
 
+# Roadmap
+
+- [x] Container
+- [x] HTTP (Router, Request, Response)
+- [x] Controllers
+- [x] Model
+- [x] Views
+- [ ] CLI (wip)
+- [ ] Query Builder (wip)
+- [ ] Migrations
+- [ ] Cookies
+- [ ] Sessions
+- [ ] Middlewares
+- [ ] Auth
+- [ ] App template and Core splitting
+
 # Documentation
 
 TODO
